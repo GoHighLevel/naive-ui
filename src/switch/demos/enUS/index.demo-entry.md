@@ -14,6 +14,7 @@ customize-value.vue
 shape.vue
 color.vue
 icon.vue
+rtl-debug.vue
 ```
 
 ## API

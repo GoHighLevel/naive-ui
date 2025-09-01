@@ -90,7 +90,7 @@ export {
   statisticRtl as unstableStatisticRtl
 } from './statistic/styles'
 export { stepsDark, stepsRtl as unstableStepsRtl } from './steps/styles'
-export { switchDark } from './switch/styles'
+export { switchDark, switchRtl as unstableSwitchRtl } from './switch/styles'
 export { tableDark, tableRtl as unstableTableRtl } from './table/styles'
 export { tabsDark } from './tabs/styles'
 export { tagDark, tagRtl as unstableTagRtl } from './tag/styles'

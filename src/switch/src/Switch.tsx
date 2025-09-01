@@ -18,6 +18,7 @@ import {
 } from 'vue'
 import { NBaseLoading, NIconSwitchTransition } from '../../_internal'
 import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
+import { useRtl } from '../../_mixins/use-rtl'
 import {
   call,
   createKey,
@@ -117,7 +118,8 @@ export default defineComponent({
         supportCssMax = true
       }
     }
-    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled, mergedRtlRef }
+      = useConfig(props)
     const themeRef = useTheme(
       'Switch',
       '-switch',
@@ -273,6 +275,7 @@ export default defineComponent({
         '--n-icon-color': iconColor
       }
     })
+    const rtlEnabledRef = useRtl('Switch', mergedRtlRef, mergedClsPrefixRef)
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
           'switch',
@@ -297,7 +300,8 @@ export default defineComponent({
       mergedDisabled: mergedDisabledRef,
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       themeClass: themeClassHandle?.themeClass,
-      onRender: themeClassHandle?.onRender
+      onRender: themeClassHandle?.onRender,
+      rtlEnabled: rtlEnabledRef
     }
   },
   render() {
@@ -335,7 +339,8 @@ export default defineComponent({
           this.round && `${mergedClsPrefix}-switch--round`,
           this.loading && `${mergedClsPrefix}-switch--loading`,
           this.pressed && `${mergedClsPrefix}-switch--pressed`,
-          this.rubberBand && `${mergedClsPrefix}-switch--rubber-band`
+          this.rubberBand && `${mergedClsPrefix}-switch--rubber-band`,
+          this.rtlEnabled && `${mergedClsPrefix}-switch--rtl`
         ]}
         tabindex={!this.mergedDisabled ? 0 : undefined}
         style={this.cssVars as CSSProperties}
