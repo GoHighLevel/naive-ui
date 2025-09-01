@@ -11,7 +11,10 @@ export { avatarGroupRtl as unstableAvatarGroupRtl } from './avatar-group/styles'
 export { avatarDark } from './avatar/styles'
 export { backTopDark } from './back-top/styles'
 export { badgeDark, badgeRtl as unstableBadgeRtl } from './badge/styles'
-export { breadcrumbDark } from './breadcrumb/styles'
+export {
+  breadcrumbDark,
+  breadcrumbRtl as unstableBreadcrumbRtl
+} from './breadcrumb/styles'
 export {
   buttonGroupDark,
   buttonGroupRtl as unstableButtonGroupRtl
