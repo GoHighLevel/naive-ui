@@ -36,7 +36,8 @@ import {
   VBinder,
   VTarget
 } from 'vueuc'
-import { useTheme } from '../../_mixins'
+import { useConfig, useTheme } from '../../_mixins'
+import { useRtl } from '../../_mixins/use-rtl'
 import {
   call,
   getFirstSlotVNode,
@@ -44,6 +45,7 @@ import {
   useAdjustedTo,
   warnOnce
 } from '../../_utils'
+import { mirrorPlacementForRTL } from '../../_utils/css'
 import NPopoverBody, { popoverBodyProps } from './PopoverBody'
 
 const bodyPropKeys = Object.keys(popoverBodyProps) as Array<
@@ -471,6 +473,16 @@ export default defineComponent({
         doUpdateShow(false)
       }
     })
+
+    // RTL setup
+    const { mergedClsPrefixRef, mergedRtlRef } = useConfig(props)
+    const rtlEnabledRef = useRtl('Popover', mergedRtlRef, mergedClsPrefixRef)
+    const mergedPlacementRef = computed(() => {
+      return rtlEnabledRef?.value
+        ? mirrorPlacementForRTL(props.placement)
+        : props.placement
+    })
+
     const returned = {
       binderInstRef,
       positionManually: positionManuallyRef,
@@ -478,6 +490,7 @@ export default defineComponent({
       // if to show popover body
       uncontrolledShow: uncontrolledShowRef,
       mergedShowArrow: mergedShowArrowRef,
+      mergedPlacement: mergedPlacementRef,
       getMergedShow,
       setShow,
       handleClick,
@@ -617,7 +630,8 @@ export default defineComponent({
                 keep(this.$props, bodyPropKeys, {
                   ...this.$attrs,
                   showArrow: this.mergedShowArrow,
-                  show: mergedShow
+                  show: mergedShow,
+                  placement: this.mergedPlacement
                 }),
                 {
                   default: () => this.$slots.default?.(),

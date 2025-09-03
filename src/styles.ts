@@ -97,7 +97,7 @@ export { tagDark, tagRtl as unstableTagRtl } from './tag/styles'
 export { thingDark, thingRtl as unstableThingRtl } from './thing/styles'
 export { timePickerDark } from './time-picker/styles'
 export { timelineDark } from './timeline/styles'
-export { tooltipDark } from './tooltip/styles'
+export { tooltipDark, tooltipRtl as unstableTooltipRtl } from './tooltip/styles'
 export { transferDark } from './transfer/styles'
 export {
   treeSelectDark,

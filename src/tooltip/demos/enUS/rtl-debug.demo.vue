@@ -1,7 +1,7 @@
 <markdown>
-# RTL 调试
+# RTL Debug
 
-包含所有提示框功能的综合 RTL 测试。
+Comprehensive RTL test including all tooltip features.
 </markdown>
 
 <script lang="ts" setup>
@@ -14,80 +14,82 @@ const message = useMessage()
 const showManualTooltip = ref(false)
 
 function handleUpdateShow(show: boolean) {
-  message.success(`提示框可见性: ${show}`)
+  message.success(`Tooltip visibility: ${show}`)
 }
 </script>
 
 <template>
   <n-space vertical>
-    <n-space><n-switch v-model:value="rtlEnabled" />RTL 模式</n-space>
+    <n-space><n-switch v-model:value="rtlEnabled" />RTL Mode</n-space>
     <n-config-provider :rtl="rtlEnabled ? rtlStyles : undefined">
       <n-space vertical :size="24">
-        <!-- 基础示例 -->
+        <!-- Basic Examples -->
         <n-divider title-placement="left">
-          基础提示框
+          Basic Tooltips
         </n-divider>
         <n-space :size="16" :wrap="true">
           <n-tooltip trigger="hover">
             <template #trigger>
-              <n-button>基础</n-button>
+              <n-button>Basic</n-button>
             </template>
-            如果它看起来像鸭子，走路像鸭子，叫起来像鸭子...那它一定是鸭子。
+            If it looks like a duck, walks like a duck, and quacks like a
+            duck...it must be a duck.
           </n-tooltip>
 
           <n-tooltip trigger="hover" :show-arrow="false">
             <template #trigger>
-              <n-button>无箭头</n-button>
+              <n-button>No Arrow</n-button>
             </template>
-            此提示框没有箭头，与弹出框相同。
+            This tooltip has no arrow, same as popover.
           </n-tooltip>
 
           <n-tooltip trigger="click">
             <template #trigger>
-              <n-button>带头部/底部</n-button>
+              <n-button>With Header/Footer</n-button>
             </template>
             <template #header>
-              <span>标题文本</span>
+              <span>Header Text</span>
             </template>
             <template #footer>
-              <span>底部文本</span>
+              <span>Footer Text</span>
             </template>
-            <span>此提示框演示 RTL 文本对齐和方向，包含头部和底部。</span>
+            <span>This tooltip demonstrates RTL text alignment and direction with
+              header and footer.</span>
           </n-tooltip>
         </n-space>
 
-        <!-- 触发类型示例 -->
+        <!-- Trigger Examples -->
         <n-divider title-placement="left">
-          触发类型
+          Trigger Types
         </n-divider>
         <n-space :size="16" :wrap="true">
           <n-tooltip placement="bottom" trigger="hover">
             <template #trigger>
-              <n-button>悬浮</n-button>
+              <n-button>Hover</n-button>
             </template>
-            <span>愿所有女孩都是加州女孩</span>
+            <span>I wish they all could be California girls</span>
           </n-tooltip>
 
           <n-tooltip placement="bottom" trigger="click">
             <template #trigger>
-              <n-button>点击</n-button>
+              <n-button>Click</n-button>
             </template>
-            <span>愿所有女孩都是加州女孩</span>
+            <span>I wish they all could be California girls</span>
           </n-tooltip>
 
           <n-tooltip :show="showManualTooltip" placement="bottom">
             <template #trigger>
               <n-button @click="showManualTooltip = !showManualTooltip">
-                手动
+                Manual
               </n-button>
             </template>
-            <span>愿所有女孩都是加州女孩</span>
+            <span>I wish they all could be California girls</span>
           </n-tooltip>
         </n-space>
 
-        <!-- 事件示例 -->
+        <!-- Event Examples -->
         <n-divider title-placement="left">
-          带事件
+          With Events
         </n-divider>
         <n-space :size="16" :wrap="true">
           <n-tooltip
@@ -96,9 +98,9 @@ function handleUpdateShow(show: boolean) {
             @update:show="handleUpdateShow"
           >
             <template #trigger>
-              <n-button>悬浮事件</n-button>
+              <n-button>Hover Event</n-button>
             </template>
-            <span>可见性改变时显示消息</span>
+            <span>Shows message when visibility changes</span>
           </n-tooltip>
 
           <n-tooltip
@@ -107,22 +109,23 @@ function handleUpdateShow(show: boolean) {
             @update:show="handleUpdateShow"
           >
             <template #trigger>
-              <n-button>点击事件</n-button>
+              <n-button>Click Event</n-button>
             </template>
-            <span>可见性改变时显示消息</span>
+            <span>Shows message when visibility changes</span>
           </n-tooltip>
         </n-space>
 
-        <!-- 自定义样式示例 -->
+        <!-- Body Style Examples -->
         <n-divider title-placement="left">
-          自定义样式
+          Custom Styling
         </n-divider>
         <n-space :size="16" :wrap="true">
           <n-tooltip :style="{ maxWidth: '400px' }" trigger="click">
             <template #trigger>
-              <n-button>长文本</n-button>
+              <n-button>Long Text</n-button>
             </template>
-            愿所有女孩都是加州女孩。愿所有女孩都是加州女孩。愿所有女孩都是加州女孩。
+            I wish they all could be California girls. I wish they all could be
+            California girls. I wish they all could be California girls.
           </n-tooltip>
 
           <n-tooltip
@@ -133,123 +136,123 @@ function handleUpdateShow(show: boolean) {
             trigger="hover"
           >
             <template #trigger>
-              <n-button>有样式</n-button>
+              <n-button>Styled</n-button>
             </template>
-            带渐变背景的自定义样式提示框。
+            Custom styled tooltip with gradient background.
           </n-tooltip>
         </n-space>
 
-        <!-- 所有位置示例 -->
+        <!-- Placement Examples -->
         <n-divider title-placement="left">
-          所有位置
+          All Placements
         </n-divider>
         <n-space :size="12" :wrap="true">
           <n-tooltip placement="top-start" trigger="hover">
             <template #trigger>
               <n-button size="small">
-                顶部开始
+                Top Start
               </n-button>
             </template>
-            顶部开始
+            Top Start
           </n-tooltip>
 
           <n-tooltip placement="top" trigger="hover">
             <template #trigger>
               <n-button size="small">
-                顶部
+                Top
               </n-button>
             </template>
-            顶部居中
+            Top Center
           </n-tooltip>
 
           <n-tooltip placement="top-end" trigger="hover">
             <template #trigger>
               <n-button size="small">
-                顶部结束
+                Top End
               </n-button>
             </template>
-            顶部结束
+            Top End
           </n-tooltip>
 
           <n-tooltip placement="left-start" trigger="hover">
             <template #trigger>
               <n-button size="small">
-                左侧开始
+                Left Start
               </n-button>
             </template>
-            左侧开始
+            Left Start
           </n-tooltip>
 
           <n-tooltip placement="left" trigger="hover">
             <template #trigger>
               <n-button size="small">
-                左侧
+                Left
               </n-button>
             </template>
-            左侧居中
+            Left Center
           </n-tooltip>
 
           <n-tooltip placement="left-end" trigger="hover">
             <template #trigger>
               <n-button size="small">
-                左侧结束
+                Left End
               </n-button>
             </template>
-            左侧结束
+            Left End
           </n-tooltip>
 
           <n-tooltip placement="right-start" trigger="hover">
             <template #trigger>
               <n-button size="small">
-                右侧开始
+                Right Start
               </n-button>
             </template>
-            右侧开始
+            Right Start
           </n-tooltip>
 
           <n-tooltip placement="right" trigger="hover">
             <template #trigger>
               <n-button size="small">
-                右侧
+                Right
               </n-button>
             </template>
-            右侧居中
+            Right Center
           </n-tooltip>
 
           <n-tooltip placement="right-end" trigger="hover">
             <template #trigger>
               <n-button size="small">
-                右侧结束
+                Right End
               </n-button>
             </template>
-            右侧结束
+            Right End
           </n-tooltip>
 
           <n-tooltip placement="bottom-start" trigger="hover">
             <template #trigger>
               <n-button size="small">
-                底部开始
+                Bottom Start
               </n-button>
             </template>
-            底部开始
+            Bottom Start
           </n-tooltip>
 
           <n-tooltip placement="bottom" trigger="hover">
             <template #trigger>
               <n-button size="small">
-                底部
+                Bottom
               </n-button>
             </template>
-            底部居中
+            Bottom Center
           </n-tooltip>
 
           <n-tooltip placement="bottom-end" trigger="hover">
             <template #trigger>
               <n-button size="small">
-                底部结束
+                Bottom End
               </n-button>
             </template>
-            底部结束
+            Bottom End
           </n-tooltip>
         </n-space>
       </n-space>

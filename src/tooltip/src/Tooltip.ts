@@ -5,6 +5,7 @@ import type { TooltipTheme } from '../styles'
 // Tooltip: popover wearing waistcoat
 import { computed, defineComponent, h, ref, type SlotsType } from 'vue'
 import { useConfig, useTheme } from '../../_mixins'
+import { useRtl } from '../../_mixins/use-rtl'
 import { NPopover } from '../../popover'
 import { popoverBaseProps } from '../../popover/src/Popover'
 import { tooltipLight } from '../styles'
@@ -26,7 +27,7 @@ export default defineComponent({
   slots: Object as SlotsType<TooltipSlots>,
   __popover__: true,
   setup(props) {
-    const { mergedClsPrefixRef } = useConfig(props)
+    const { mergedClsPrefixRef, mergedRtlRef } = useConfig(props)
     const themeRef = useTheme(
       'Tooltip',
       '-tooltip',
@@ -35,6 +36,7 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
+    const rtlEnabledRef = useRtl('Tooltip', mergedRtlRef, mergedClsPrefixRef)
     const popoverRef = ref<PopoverInst | null>(null)
     const tooltipExposedMethod: TooltipInst = {
       syncPosition() {
@@ -48,13 +50,14 @@ export default defineComponent({
       ...tooltipExposedMethod,
       popoverRef,
       mergedTheme: themeRef,
+      rtlEnabled: rtlEnabledRef,
       popoverThemeOverrides: computed(() => {
         return themeRef.value.self
       })
     }
   },
   render() {
-    const { mergedTheme, internalExtraClass } = this
+    const { mergedTheme, internalExtraClass, rtlEnabled } = this
     return h(
       NPopover,
       {
@@ -62,7 +65,9 @@ export default defineComponent({
         theme: mergedTheme.peers.Popover,
         themeOverrides: mergedTheme.peerOverrides.Popover,
         builtinThemeOverrides: this.popoverThemeOverrides,
-        internalExtraClass: internalExtraClass.concat('tooltip'),
+        internalExtraClass: internalExtraClass
+          .concat('tooltip')
+          .concat(rtlEnabled ? 'tooltip--rtl' : []),
         ref: 'popoverRef'
       },
       this.$slots
