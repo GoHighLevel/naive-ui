@@ -8,7 +8,7 @@ import {
   h,
   type PropType
 } from 'vue'
-import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import { useConfig, useRtl, useTheme, useThemeClass } from '../../_mixins'
 import { createKey, type ExtractPublicPropTypes } from '../../_utils'
 import { progressLight } from '../styles'
 import Circle from './Circle'
@@ -92,7 +92,8 @@ export default defineComponent({
       }
       return undefined
     })
-    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled, mergedRtlRef }
+      = useConfig(props)
     const themeRef = useTheme(
       'Progress',
       '-progress',
@@ -138,6 +139,7 @@ export default defineComponent({
         '--n-text-color-line-outer': textColorLineOuter
       }
     })
+    const rtlEnabledRef = useRtl('Progress', mergedRtlRef, mergedClsPrefixRef)
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
           'progress',
@@ -152,7 +154,8 @@ export default defineComponent({
       gapDeg,
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       themeClass: themeClassHandle?.themeClass,
-      onRender: themeClassHandle?.onRender
+      onRender: themeClassHandle?.onRender,
+      rtlEnabled: rtlEnabledRef
     }
   },
   render() {
@@ -181,7 +184,8 @@ export default defineComponent({
       gapOffsetDegree,
       themeClass,
       $slots,
-      onRender
+      onRender,
+      rtlEnabled
     } = this
     onRender?.()
     return (
@@ -190,7 +194,8 @@ export default defineComponent({
           themeClass,
           `${mergedClsPrefix}-progress`,
           `${mergedClsPrefix}-progress--${type}`,
-          `${mergedClsPrefix}-progress--${status}`
+          `${mergedClsPrefix}-progress--${status}`,
+          rtlEnabled && `${mergedClsPrefix}-progress--rtl`
         ]}
         style={cssVars as CSSProperties}
         aria-valuemax={100}

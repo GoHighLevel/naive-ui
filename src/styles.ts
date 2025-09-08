@@ -77,7 +77,10 @@ export {
 export { popconfirmDark } from './popconfirm/styles'
 export { popoverDark, popoverRtl as unstablePopoverRtl } from './popover/styles'
 export { popselectDark } from './popselect/styles'
-export { progressDark } from './progress/styles'
+export {
+  progressDark,
+  progressRtl as unstableProgressRtl
+} from './progress/styles'
 export { radioDark, radioRtl as unstableRadioRtl } from './radio/styles'
 export { rateDark } from './rate/styles'
 export { resultDark } from './result/styles'

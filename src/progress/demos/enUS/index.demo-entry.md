@@ -16,6 +16,7 @@ no-indicator.vue
 height.vue
 processing.vue
 gradient.vue
+rtl-debug.vue
 ```
 
 ## API
