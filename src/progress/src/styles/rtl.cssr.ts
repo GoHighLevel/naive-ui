@@ -1,17 +1,32 @@
-import { cB, cM } from '../../../_utils/cssr'
+import { c, cB, cM } from '../../../_utils/cssr'
 
-export default cB('progress', [
-  cM('rtl', `
-    direction: rtl;
-  `, [
-    cM('line', [
-      cB('progress-content', [
-        cB('progress-graph', [
-          cB('progress-graph-line', [
-            cB('progress-graph-line-rail', [
-              cB('progress-graph-line-fill', `
-                transform-origin: right center;
-              `)
+export default c([
+  cB('progress', [
+    cM('rtl', `
+      direction: rtl;
+    `, [
+      cM('line', [
+        cB('progress-content', [
+          cB('progress-graph', [
+            cB('progress-graph-line', [
+              cB('progress-graph-line-rail', [
+                cB('progress-graph-line-fill', `
+                  transform-origin: right center;
+                `, [
+                  cM('processing', [
+                    c('&::after', `
+                      content: "";
+                      background-image: var(--n-line-bg-processing);
+                      animation: progress-processing-animation-rtl 2s var(--n-bezier) infinite;
+                      position: absolute;
+                      top: 0;
+                      bottom: 0;
+                      right: 0;
+                      left: 100%;
+                    `)
+                  ])
+                ])
+              ])
             ])
           ])
         ])
@@ -22,7 +37,6 @@ export default cB('progress', [
       }),
       cB('progress-icon', `
         padding-left: 0;
-        padding-right: 14px;
       `, [
         cM('as-text', `
           padding-left: 0;
@@ -59,5 +73,31 @@ export default cB('progress', [
         direction: ltr;
       `)
     ])
-  ])
+  ]),
+  c('@keyframes progress-processing-animation-rtl', `
+    0% {
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      left: 100%;
+      opacity: 1;
+    }
+    66% {
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      opacity: 0;
+    }
+    100% {
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      opacity: 0;
+    }
+  `)
 ])

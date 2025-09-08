@@ -28,6 +28,16 @@ const rtlStyles = [unstableProgressRtl]
           indicator-placement="inside"
           :height="24"
         />
+        <!-- Processing Progress -->
+        <n-h4>Processing Progress</n-h4>
+        <n-progress type="line" :percentage="60" processing />
+        <n-progress
+          type="line"
+          :percentage="75"
+          indicator-placement="inside"
+          :height="20"
+          processing
+        />
         <!-- Circle Progress -->
         <n-h4>Circle Progress</n-h4>
         <n-space>
