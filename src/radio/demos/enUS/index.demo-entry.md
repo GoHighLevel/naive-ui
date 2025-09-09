@@ -11,6 +11,7 @@ basic.vue
 group.vue
 button-group.vue
 size.vue
+rtl-debug.vue
 ```
 
 ## API
