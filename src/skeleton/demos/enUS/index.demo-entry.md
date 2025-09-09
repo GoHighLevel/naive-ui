@@ -8,6 +8,7 @@ A twinkle placeholder.
 basic.vue
 box.vue
 size.vue
+rtl-debug.vue
 ```
 
 ## API

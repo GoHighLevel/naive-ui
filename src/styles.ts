@@ -82,6 +82,10 @@ export { radioDark, radioRtl as unstableRadioRtl } from './radio/styles'
 export { rateDark } from './rate/styles'
 export { resultDark } from './result/styles'
 export { selectDark, selectRtl as unstableSelectRtl } from './select/styles'
+export {
+  skeletonDark,
+  skeletonRtl as unstableSkeletonRtl
+} from './skeleton/styles'
 export { sliderDark } from './slider/styles'
 export { spaceDark, spaceRtl as unstableSpaceRtl } from './space/styles'
 export { spinDark } from './spin/styles'

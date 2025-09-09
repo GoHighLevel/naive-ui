@@ -9,7 +9,7 @@ import {
   mergeProps,
   type PropType
 } from 'vue'
-import { type ThemeProps, useConfig, useTheme } from '../../_mixins'
+import { type ThemeProps, useConfig, useRtl, useTheme } from '../../_mixins'
 import { createKey, useHoudini } from '../../_utils'
 import { skeletonLight } from '../styles'
 import style from './styles/index.cssr'
@@ -44,7 +44,7 @@ export default defineComponent({
   props: skeletonProps,
   setup(props) {
     useHoudini()
-    const { mergedClsPrefixRef } = useConfig(props)
+    const { mergedClsPrefixRef, mergedRtlRef } = useConfig(props)
     const themeRef = useTheme(
       'Skeleton',
       '-skeleton',
@@ -53,8 +53,10 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
+    const rtlEnabledRef = useRtl('Skeleton', mergedRtlRef, mergedClsPrefixRef)
     return {
       mergedClsPrefix: mergedClsPrefixRef,
+      rtlEnabled: rtlEnabledRef,
       style: computed(() => {
         const theme = themeRef.value
         const {
@@ -95,7 +97,13 @@ export default defineComponent({
     }
   },
   render() {
-    const { repeat: repeatProp, style, mergedClsPrefix, $attrs } = this
+    const {
+      repeat: repeatProp,
+      style,
+      mergedClsPrefix,
+      rtlEnabled,
+      $attrs
+    } = this
     // BUG:
     // Chrome devtools can't read the element
     // Maybe it's a bug of chrome
@@ -103,7 +111,10 @@ export default defineComponent({
       'div',
       mergeProps(
         {
-          class: `${mergedClsPrefix}-skeleton`,
+          class: [
+            `${mergedClsPrefix}-skeleton`,
+            rtlEnabled && `${mergedClsPrefix}-skeleton--rtl`
+          ],
           style
         },
         $attrs
